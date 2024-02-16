@@ -32,24 +32,9 @@ public class Article {
     private List<Comments> comments;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "favorites")
+    @JoinTable(name = "favorites")
     private Set<Users> fans;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tags> tags;
-
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "favorites")
-//    public Set<Users> getFans(){return fans;}
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    public Users getAuthor(){return author;}
-//
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "article_id")
-//    public List<Comments> getComments(){return comments;}
-//
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    public List<Tags> getTags() {return tags;}
 }
