@@ -19,7 +19,6 @@ public class UserObjectConvert {
         return UserResponse.fromUserEntity(userEntity, jwtService.createJwt(userEntity));
     }
 
-
     public UserProfileResponse entityToUserProfileResponse(Users userEntity){
         return UserProfileResponse.builder()
                 .profile(Profile.builder()
