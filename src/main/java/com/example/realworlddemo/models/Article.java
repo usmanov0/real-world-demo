@@ -1,6 +1,7 @@
 package com.example.realworlddemo.models;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,22 +24,32 @@ public class Article {
     private String title;
     private String description;
     private String body;
-    private Users author;
-    private List<Comments> comments;
-    private List<Tags> tags;
-    private Set<Users> fans;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "favorites")
-    public Set<Users> getFans(){return fans;}
 
     @ManyToOne(fetch = FetchType.EAGER)
-    public Users getAuthor(){return author;}
+    private Users author;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
-    public List<Comments> getComments(){return comments;}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    private List<Comments> comments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    public List<Tags> getTags() {return tags;}
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "favorites")
+    private Set<Users> fans;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Tags> tags;
+
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "favorites")
+//    public Set<Users> getFans(){return fans;}
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    public Users getAuthor(){return author;}
+//
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "article_id")
+//    public List<Comments> getComments(){return comments;}
+//
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    public List<Tags> getTags() {return tags;}
 }

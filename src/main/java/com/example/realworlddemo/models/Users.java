@@ -23,13 +23,14 @@ public class Users {
     private String bio;
     private String image;
     private String username;
-    private Set<Article> favorite;
-    private Set<Users> followers;
 
-    @ManyToMany(mappedBy = "fans", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<Article> getFavorite(){return favorite;}
+    @ManyToMany(mappedBy = "favoritedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Article> favorite;
 
     @ManyToMany
-    @JoinTable(name = "user_followers")
-    public Set<Users> getFollowers() {return followers;}
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id"))
+    private Set<Users> followers;
 }

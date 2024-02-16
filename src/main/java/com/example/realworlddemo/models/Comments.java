@@ -18,12 +18,10 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String body;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Users.class)
     private Users author;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Article.class)
     private Article article;
-
-    @ManyToOne(targetEntity = Users.class)
-    public Users getAuthor(){return author;}
-
-    @ManyToOne(targetEntity = Article.class)
-    public Article getArticle(){return article;}
 }
