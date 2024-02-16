@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.nio.file.LinkOption;
-import java.util.List;
-
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findUserByUsername(
@@ -28,6 +25,6 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM user_followers WHERE users_id = ?1 AND followers_id = ?2", nativeQuery = true)
+    @Query(value = "DELETE FROM user_followers WHERE user_id = ?1 AND follower_id = ?2", nativeQuery = true)
     void unFollowUser(Long loggedInUserUserId, Long userToFollow);
 }
