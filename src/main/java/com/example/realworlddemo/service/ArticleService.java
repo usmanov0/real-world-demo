@@ -1,8 +1,8 @@
 package com.example.realworlddemo.service;
 
 
-import com.example.realworlddemo.dto.ArticleUpdateRequest;
-import com.example.realworlddemo.dto.CommentCreateReq;
+import com.example.realworlddemo.dto.request.ArticleUpdateRequest;
+import com.example.realworlddemo.dto.request.CommentCreateRequest;
 import com.example.realworlddemo.exceptions.AccessDeniedException;
 import com.example.realworlddemo.models.Article;
 import com.example.realworlddemo.models.Comments;
@@ -92,7 +92,7 @@ public class ArticleService {
         articleRepo.deleteBySlug(slug);
     }
 
-    public Comments addCommentToArticle(String slug, CommentCreateReq.Comment  body, Users currentLoggedInUser){
+    public Comments addCommentToArticle(String slug, CommentCreateRequest.Comment  body, Users currentLoggedInUser){
         Article article = getArticleBySlug(slug);
         Comments comment = Comments.builder()
                 .body(body.getBody())
