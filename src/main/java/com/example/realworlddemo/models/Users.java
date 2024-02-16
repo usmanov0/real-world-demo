@@ -24,7 +24,7 @@ public class Users {
     private String image;
     private String username;
 
-    @ManyToMany(mappedBy = "favoritedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "fans", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Article> favorite;
 
     @ManyToMany
