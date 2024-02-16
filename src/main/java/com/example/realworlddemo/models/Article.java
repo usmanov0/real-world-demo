@@ -2,6 +2,7 @@ package com.example.realworlddemo.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +13,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "article")
+@Table(name = "articles")
+@Builder
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String slug;
     private String title;
+    private String description;
     private String body;
     private Users author;
     private List<Comments> comments;
@@ -26,7 +29,7 @@ public class Article {
     private Set<Users> fans;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "favourites")
+    @JoinTable(name = "favorites")
     public Set<Users> getFans(){return fans;}
 
     @ManyToOne(fetch = FetchType.EAGER)
