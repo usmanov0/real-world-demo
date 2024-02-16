@@ -16,7 +16,7 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     Article findArticleBySlug(@Param("slug")String slug);
 
 
-    @Query(value = "select * from  articles as a where  a.author.id in (select users_id from user_followers as uf where" +
+    @Query(value = "select * from  articles as a where  a.author.id in (select user_id from user_followers as uf where" +
             "followers_id = ?1 ) order by created_at desc",nativeQuery = true)
     List<Article> findArticleFeed(Long userId, Pageable pageable);
 
