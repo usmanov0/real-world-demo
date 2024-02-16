@@ -1,10 +1,9 @@
-package com.example.realworlddemo.dto;
+package com.example.realworlddemo.dto.request;
 
-import com.example.realworlddemo.models.Comments;
 import lombok.Getter;
 
 @Getter
-public class CommentCreateReq {
+public class CommentCreateRequest {
     private Comment comment;
 
     @Getter

@@ -1,4 +1,4 @@
-package com.example.realworlddemo.dto;
+package com.example.realworlddemo.dto.request;
 
 import com.example.realworlddemo.models.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
