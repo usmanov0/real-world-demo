@@ -1,13 +1,12 @@
 package com.example.realworlddemo.dto.request;
 
-import com.example.realworlddemo.models.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class UserSignUpRequest {
+public class RegistrationRequest {
     @JsonProperty("user")
-    private User users;
+    private User user;
 
     @Getter
     public class User{
