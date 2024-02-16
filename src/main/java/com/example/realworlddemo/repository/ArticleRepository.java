@@ -2,7 +2,6 @@ package com.example.realworlddemo.repository;
 
 import com.example.realworlddemo.models.Article;
 import jakarta.transaction.Transactional;
-import org.hibernate.sql.ast.tree.expression.JdbcParameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -44,4 +43,3 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     @Query(value = "delete from favorites where favorite_id = ?2 and fans_id = ?1",nativeQuery = true)
     void unfavoriteArticle(Long userId, Long articleId);
 }
-
