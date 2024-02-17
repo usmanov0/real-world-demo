@@ -5,14 +5,13 @@ import com.example.realworlddemo.dto.request.RegistrationRequest;
 import com.example.realworlddemo.dto.request.UserUpdateRequest;
 import com.example.realworlddemo.dto.response.UserProfileResponse;
 import com.example.realworlddemo.dto.response.UserResponse;
-import com.example.realworlddemo.mapper.UserObjectConvert;
+import com.example.realworlddemo.converter.UserObjectConvert;
 import com.example.realworlddemo.models.Users;
 import com.example.realworlddemo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
