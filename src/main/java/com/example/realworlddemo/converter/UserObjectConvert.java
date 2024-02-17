@@ -1,5 +1,4 @@
-package com.example.realworlddemo.mapper;
-
+package com.example.realworlddemo.converter;
 import com.example.realworlddemo.dto.response.Profile;
 import com.example.realworlddemo.dto.response.UserProfileResponse;
 import com.example.realworlddemo.dto.response.UserResponse;

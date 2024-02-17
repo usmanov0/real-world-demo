@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -37,4 +38,7 @@ public class Article {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tags> tags;
+
+    private Date createdAt;
+    private Date updatedAt;
 }
