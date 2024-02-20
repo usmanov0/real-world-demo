@@ -1,11 +1,11 @@
 package com.example.realworlddemo.converter;
+
 import com.example.realworlddemo.dto.response.ArticleResponse;
 import com.example.realworlddemo.dto.response.Articles;
 import com.example.realworlddemo.dto.response.AuthorResponse;
 import com.example.realworlddemo.models.Article;
 import com.example.realworlddemo.models.Users;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
