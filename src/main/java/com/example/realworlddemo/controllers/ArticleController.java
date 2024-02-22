@@ -1,10 +1,15 @@
 package com.example.realworlddemo.controllers;
 
 import com.example.realworlddemo.converter.ArticleObjectConverter;
+import com.example.realworlddemo.converter.CommentObjectConverter;
 import com.example.realworlddemo.dto.request.ArticleCreateRequest;
 import com.example.realworlddemo.dto.request.ArticleUpdateRequest;
+import com.example.realworlddemo.dto.request.CommentCreateRequest;
 import com.example.realworlddemo.dto.response.ArticleResponse;
+import com.example.realworlddemo.dto.response.Comment;
+import com.example.realworlddemo.dto.response.CommentResponse;
 import com.example.realworlddemo.models.Article;
+import com.example.realworlddemo.models.Comments;
 import com.example.realworlddemo.models.Users;
 import com.example.realworlddemo.service.ArticleService;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +25,8 @@ import java.util.stream.Collectors;
 public class ArticleController {
     public final ArticleService articleService;
     ArticleObjectConverter articleObjectConverter;
+
+    CommentObjectConverter commentObjectConverter;
 
     public ArticleController(ArticleService articleService, ArticleObjectConverter articleObjectConverter) {
         this.articleService = articleService;
@@ -78,6 +85,30 @@ public class ArticleController {
             @AuthenticationPrincipal Users userEntity){
         Article articleEntity = articleService.updateArticle(body.getArticle(), slug, userEntity);
         return ResponseEntity.ok(articleObjectConverter.entityToResponse(articleEntity));
+    }
+
+    @PostMapping(value = "/{slug}/comments", produces = "application/json")
+    public ResponseEntity<CommentResponse> addCommentToArticle(
+            @PathVariable(value = "slug") String slug,
+            @RequestBody CommentCreateRequest body,
+            @AuthenticationPrincipal Users userEntity){
+        Comments comments = articleService.addCommentToArticle(slug, body.getComment(), userEntity);
+        return ResponseEntity.ok(commentObjectConverter.entityToResponse(comments));
+    }
+
+    @GetMapping(value = "/{slug}/comments", produces = "application/json")
+    public ResponseEntity<List<Comment>> getCommentList(@PathVariable(value = "slug") String slug){
+        List<Comments> comments = articleService.getAllCommentsBySlug(slug);
+        return ResponseEntity.ok(commentObjectConverter.entityToResponse(comments));
+    }
+
+    @DeleteMapping(value = "/{slug}/comments{id}", produces = "application/json")
+    public ResponseEntity<String> deleteComment(
+            @PathVariable(value = "slug") String  slug,
+            @PathVariable(value = "id") Long id,
+            @AuthenticationPrincipal Users user){
+        articleService.deleteComment(id, user);
+        return ResponseEntity.ok("comment deleted");
     }
 
     @DeleteMapping(value = "article/{slug}", produces = "application/json")
