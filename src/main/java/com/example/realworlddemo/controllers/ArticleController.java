@@ -102,16 +102,15 @@ public class ArticleController {
         return ResponseEntity.ok(commentObjectConverter.entityToResponse(comments));
     }
 
-    @DeleteMapping(value = "/{slug}/comments{id}", produces = "application/json")
+    @DeleteMapping(value = "/{slug}/comments/{id}", produces = "application/json")
     public ResponseEntity<String> deleteComment(
-            @PathVariable(value = "slug") String  slug,
             @PathVariable(value = "id") Long id,
             @AuthenticationPrincipal Users user){
         articleService.deleteComment(id, user);
         return ResponseEntity.ok("comment deleted");
     }
 
-    @DeleteMapping(value = "article/{slug}", produces = "application/json")
+    @DeleteMapping(value = "/article/{slug}", produces = "application/json")
     public ResponseEntity<String> deleteArticle(@PathVariable(value = "slug", required = true) String slug,
                                                 @AuthenticationPrincipal Users userEntity){
         articleService.deleteArticleBySlug(slug, userEntity);
