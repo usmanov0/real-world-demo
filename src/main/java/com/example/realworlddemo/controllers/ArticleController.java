@@ -12,6 +12,7 @@ import com.example.realworlddemo.models.Article;
 import com.example.realworlddemo.models.Comments;
 import com.example.realworlddemo.models.Users;
 import com.example.realworlddemo.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,14 @@ public class ArticleController {
 
     CommentObjectConverter commentObjectConverter;
 
-    public ArticleController(ArticleService articleService, ArticleObjectConverter articleObjectConverter) {
+    @Autowired
+    public ArticleController(ArticleService articleService, ArticleObjectConverter articleObjectConverter, CommentObjectConverter commentObjectConverter) {
         this.articleService = articleService;
         this.articleObjectConverter = articleObjectConverter;
+        this.commentObjectConverter = commentObjectConverter;
     }
 
-    @PostMapping(value = "/", produces = "application/json")
+    @PostMapping(value = "/new", produces = "application/json")
     public ResponseEntity<ArticleResponse> createArticle(
             @RequestBody ArticleCreateRequest body,
             @AuthenticationPrincipal Users userEntity){
@@ -48,7 +51,7 @@ public class ArticleController {
     }
 
     @GetMapping(value = "/", produces = "application/json")
-    public ResponseEntity<List<ArticleResponse>> getArticleList(
+    public ResponseEntity<List<ArticleResponse>> getArticles(
             @RequestParam(value = "tag", required = false, defaultValue = "10") String tag,
             @RequestParam(value = "author", required = false, defaultValue = "") String author,
             @RequestParam(value = "favorited", required = false, defaultValue = "10") String favorited,
@@ -78,7 +81,7 @@ public class ArticleController {
         return ResponseEntity.ok(articleObjectConverter.entityToResponse(article));
     }
 
-    @PutMapping(value = "/articles/{slug}", produces = "application/json")
+    @PutMapping(value = "/{slug}", produces = "application/json")
     public ResponseEntity<ArticleResponse> updateArticle(
             @PathVariable(value = "slug", required = true) String slug,
             @RequestBody ArticleUpdateRequest body,
@@ -110,7 +113,7 @@ public class ArticleController {
         return ResponseEntity.ok("comment deleted");
     }
 
-    @DeleteMapping(value = "/article/{slug}", produces = "application/json")
+    @DeleteMapping(value = "/{slug}", produces = "application/json")
     public ResponseEntity<String> deleteArticle(@PathVariable(value = "slug", required = true) String slug,
                                                 @AuthenticationPrincipal Users userEntity){
         articleService.deleteArticleBySlug(slug, userEntity);

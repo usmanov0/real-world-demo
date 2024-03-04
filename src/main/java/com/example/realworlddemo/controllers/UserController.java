@@ -8,6 +8,7 @@ import com.example.realworlddemo.dto.response.UserResponse;
 import com.example.realworlddemo.converter.UserObjectConvert;
 import com.example.realworlddemo.models.Users;
 import com.example.realworlddemo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,9 +20,9 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-
     private final UserObjectConvert converter;
 
+    @Autowired
     public UserController(UserService userService, UserObjectConvert converter) {
         this.userService = userService;
         this.converter = converter;
