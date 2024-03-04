@@ -5,10 +5,12 @@ import com.example.realworlddemo.dto.response.Comment;
 import com.example.realworlddemo.dto.response.CommentResponse;
 import com.example.realworlddemo.models.Comments;
 import com.example.realworlddemo.models.Users;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CommentObjectConverter {
 
     public CommentResponse entityToResponse(Comments commentEntity){
