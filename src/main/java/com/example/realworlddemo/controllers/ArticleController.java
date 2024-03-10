@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class ArticleController {
     public final ArticleService articleService;
     ArticleObjectConverter articleObjectConverter;
-
     CommentObjectConverter commentObjectConverter;
 
     @Autowired
