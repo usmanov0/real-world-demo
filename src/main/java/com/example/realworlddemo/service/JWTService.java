@@ -14,7 +14,7 @@ import io.jsonwebtoken.Claims;
 public class JWTService {
     public static final String JWT_KEY = "dL9nLwtKCjFfgj9gwuhJwqw4R4iepkfzC5XGdLfpyFTKuWDcpGCeZDBghzitHUjn";
 
-    public static  final int JWT_EXPIRED_AT = 1000 * 60 * 60 * 24 * 7;  //week
+    public static  final int JWT_EXPIRED_AT = 1000 * 60 * 60 * 24 * 7;
 
     private final Key key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
 
