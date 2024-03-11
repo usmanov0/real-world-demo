@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -53,7 +52,6 @@ public class UserController {
     @PutMapping("/user")
     ResponseEntity<UserResponse> updateUser(@AuthenticationPrincipal Users user,
                                             @RequestBody UserUpdateRequest updateUser){
-        Optional.ofNullable(updateUser.getUsers().getUsername()).ifPresent(user::setUsername);
         if (updateUser.getUsers().getUsername() != null) user.setUsername(updateUser.getUsers().getUsername());
         if (updateUser.getUsers().getEmail() != null) user.setEmail(updateUser.getUsers().getEmail());
         if (updateUser.getUsers().getBio() != null) user.setBio(updateUser.getUsers().getBio());
